@@ -28,15 +28,11 @@ class QIC():
                 control_qubit = circ.find_bit(qargs[0]).index
                 target_qubit = circ.find_bit(qargs[1]).index
                 qubit_pair = tuple(sorted([control_qubit, target_qubit]))
-                print("qubit pair is",qubit_pair)
                 cnot_count_per_pair[qubit_pair] += 1
-
-        print("cnot_count_per_pair is",cnot_count_per_pair)
 
         # reduce the circuit by ratio
         if self.reduce_by_ratio:
             min_2q_count = min(cnot_count_per_pair.values())
-            print("min_2q_count is",min_2q_count)
             for pair in cnot_count_per_pair.keys():
                 cnot_count_per_pair[pair] = ceil(cnot_count_per_pair[pair]/min_2q_count)
 
