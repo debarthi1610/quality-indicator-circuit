@@ -9,7 +9,7 @@ class QIC():
     def __init__(self,
                  circuits: List[QuantumCircuit],
                  reduce_by_ratio: Optional[bool]=True,
-                 gate_2q: Optional[str]='ecr'
+                 gate_2q: Optional[str]='cz'
                 ):
         self.circuits = circuits
         self.reduce_by_ratio = reduce_by_ratio
