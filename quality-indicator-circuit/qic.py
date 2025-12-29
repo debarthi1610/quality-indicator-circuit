@@ -7,7 +7,7 @@ from math import ceil
 class QIC():
 
     def __init__(self,
-                 circuits: List[QuantumCircuit],
+                 circuits: QuantumCircuit | List[QuantumCircuit],
                  reduce_by_ratio: Optional[bool]=True,
                  gate_2q: Optional[str]='cz'
                 ):
@@ -63,5 +63,12 @@ class QIC():
 
 
     def construct_qic(self):
-        qic_circuits = [self._construct_qic(circ) for circ in self.circuits]
+        if isinstance(self.circuits, QuantumCircuit):
+            qic_circuits = self._construct_qic(self.circuits)
+        elif isinstance(self.circuits, List):
+            qic_circuits = [self._construct_qic(circ) for circ in self.circuits]
+        else:
+            raise ValueError(f'Type {type(self.circuits)} not recorgnized. Type of input circuits must be 
+            QuantumCircuit or list of QuantumCircuits')
+            qic_circuits = None
         return qic_circuits
